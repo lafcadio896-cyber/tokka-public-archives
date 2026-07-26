@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 公開方針を確認する
+    url: https://github.com/lafcadio896-cyber/tokka-public-archives/blob/main/PUBLICATION_POLICY.md
+    about: 公開対象、訂正、削除の基準を確認できます。
