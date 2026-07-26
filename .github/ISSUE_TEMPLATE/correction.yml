@@ -1,0 +1,49 @@
+name: 記録の訂正・表示不具合
+
+description: 公開記録の誤字、画像切れ、重複、公開範囲の問題などを連絡します。
+title: "[訂正依頼] "
+labels:
+  - correction
+body:
+  - type: markdown
+    attributes:
+      value: |
+        対象の記録と問題点を記入してください。創作内容への解釈や感想ではなく、訂正または表示上の問題を対象とします。
+
+  - type: input
+    id: record
+    attributes:
+      label: 対象記録
+      description: 記録番号、フォルダ名、またはURLを記入してください。
+      placeholder: TK-YYYY-MM-DD-R0000A00
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: 問題の種類
+      options:
+        - 誤字・脱字
+        - 画像の欠落・文字切れ
+        - ファイルの不足・重複
+        - 公開範囲・権利上の問題
+        - その他
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: 詳細
+      description: 該当箇所と、正しいと思われる内容を具体的に記入してください。
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: 確認
+      options:
+        - label: 個人情報や認証情報を本文に記載していません。
+          required: true
