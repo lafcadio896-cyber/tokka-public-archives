@@ -1,0 +1,238 @@
+:root {
+  --paper: #f3f2ed;
+  --surface: #fbfbf8;
+  --ink: #171915;
+  --muted: #666a62;
+  --line: #c9cbc3;
+  --line-dark: #969b91;
+  --accent: #24352b;
+  --stamp: #6f2d2d;
+  --shadow: 0 12px 30px rgba(20, 24, 20, .08);
+}
+
+* { box-sizing: border-box; }
+
+html { background: var(--paper); }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    linear-gradient(rgba(255,255,255,.42), rgba(255,255,255,.42)),
+    repeating-linear-gradient(0deg, transparent 0, transparent 31px, rgba(40,50,42,.025) 32px);
+  font-family: "Noto Sans JP", "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+  line-height: 1.85;
+  letter-spacing: .02em;
+}
+
+a { color: var(--accent); text-underline-offset: .2em; }
+a:hover { text-decoration-thickness: 2px; }
+
+.classification {
+  border-bottom: 1px solid var(--line-dark);
+  background: #e4e5df;
+  color: #4e534b;
+  font-size: .72rem;
+  letter-spacing: .18em;
+  padding: .38rem max(1.2rem, calc((100vw - 1040px) / 2));
+  text-align: right;
+}
+
+.site-header {
+  background: rgba(250,250,247,.96);
+  border-bottom: 1px solid var(--line-dark);
+}
+
+.header-inner {
+  width: min(1040px, calc(100% - 2rem));
+  margin: 0 auto;
+  min-height: 132px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.organization {
+  margin: 0 0 .25rem;
+  color: var(--muted);
+  font-size: .78rem;
+  letter-spacing: .2em;
+}
+
+.site-name {
+  margin: 0;
+  font-family: "Noto Serif JP", "Yu Mincho", serif;
+  font-size: clamp(1.65rem, 4vw, 2.55rem);
+  font-weight: 600;
+  letter-spacing: .12em;
+}
+
+.registry-mark {
+  width: 82px;
+  height: 82px;
+  border: 3px double var(--stamp);
+  color: var(--stamp);
+  transform: rotate(-2deg);
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  line-height: 1.1;
+  flex: 0 0 auto;
+}
+
+.registry-mark span { font-family: serif; font-size: 1.3rem; font-weight: 700; letter-spacing: .15em; }
+.registry-mark small { font-size: .52rem; letter-spacing: .12em; margin-top: .35rem; }
+
+.page-shell {
+  width: min(1040px, calc(100% - 2rem));
+  margin: 2.4rem auto 4rem;
+}
+
+.notice {
+  border: 1px solid var(--line-dark);
+  border-left: 5px solid var(--accent);
+  background: var(--surface);
+  padding: 1.1rem 1.3rem;
+  box-shadow: var(--shadow);
+}
+
+.notice p { margin: .25rem 0; }
+.notice strong { letter-spacing: .08em; }
+
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin: 1.5rem 0 2.5rem;
+  border: 1px solid var(--line-dark);
+  background: var(--line);
+}
+
+.status-item {
+  background: var(--surface);
+  padding: 1rem 1.1rem;
+  min-height: 92px;
+}
+
+.status-label {
+  display: block;
+  color: var(--muted);
+  font-size: .72rem;
+  letter-spacing: .13em;
+  margin-bottom: .45rem;
+}
+
+.status-value {
+  display: block;
+  font-family: "Roboto Mono", "Consolas", monospace;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.section-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 2px solid var(--ink);
+  margin: 0 0 1rem;
+  padding-bottom: .5rem;
+}
+
+.section-heading h1,
+.section-heading h2 {
+  margin: 0;
+  font-family: "Noto Serif JP", "Yu Mincho", serif;
+  letter-spacing: .1em;
+}
+
+.section-heading small { color: var(--muted); }
+
+.record-list { display: grid; gap: 1rem; }
+
+.record-card {
+  display: grid;
+  grid-template-columns: 180px 1fr auto;
+  gap: 1.25rem;
+  align-items: start;
+  border: 1px solid var(--line-dark);
+  background: var(--surface);
+  padding: 1.2rem;
+  box-shadow: 0 4px 14px rgba(20,24,20,.04);
+}
+
+.record-id {
+  font-family: "Roboto Mono", "Consolas", monospace;
+  font-size: .77rem;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.record-title {
+  margin: 0 0 .45rem;
+  font-family: "Noto Serif JP", "Yu Mincho", serif;
+  font-size: 1.08rem;
+  line-height: 1.55;
+}
+
+.record-summary { margin: 0; color: #454943; font-size: .9rem; }
+
+.record-meta {
+  margin-top: .7rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem .9rem;
+  color: var(--muted);
+  font-size: .75rem;
+}
+
+.record-link {
+  display: inline-block;
+  border: 1px solid var(--accent);
+  padding: .5rem .75rem;
+  text-decoration: none;
+  font-size: .78rem;
+  white-space: nowrap;
+}
+.record-link:hover { background: var(--accent); color: #fff; }
+
+.empty-state, .loading-state, .error-state {
+  border: 1px dashed var(--line-dark);
+  background: rgba(255,255,255,.45);
+  padding: 2rem;
+  text-align: center;
+  color: var(--muted);
+}
+
+.utility-links {
+  margin-top: 2.7rem;
+  border-top: 1px solid var(--line-dark);
+  border-bottom: 1px solid var(--line-dark);
+  padding: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem 1.5rem;
+  font-size: .82rem;
+}
+
+.site-footer {
+  width: min(1040px, calc(100% - 2rem));
+  margin: 0 auto;
+  border-top: 1px solid var(--line-dark);
+  padding: 1.2rem 0 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--muted);
+  font-size: .72rem;
+}
+
+@media (max-width: 760px) {
+  .header-inner { min-height: 110px; }
+  .registry-mark { width: 64px; height: 64px; }
+  .status-grid { grid-template-columns: 1fr; }
+  .record-card { grid-template-columns: 1fr; }
+  .record-link { justify-self: start; }
+  .site-footer { display: block; }
+}
