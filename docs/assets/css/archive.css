@@ -190,10 +190,14 @@ a:hover { text-decoration-thickness: 2px; }
 .record-link {
   display: inline-block;
   border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
   padding: .5rem .75rem;
   text-decoration: none;
+  font: inherit;
   font-size: .78rem;
   white-space: nowrap;
+  cursor: pointer;
 }
 .record-link:hover { background: var(--accent); color: #fff; }
 
@@ -228,6 +232,104 @@ a:hover { text-decoration-thickness: 2px; }
   font-size: .72rem;
 }
 
+.record-viewer {
+  width: min(1180px, calc(100% - 2rem));
+  max-height: calc(100vh - 2rem);
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--line-dark);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .28);
+}
+
+.record-viewer::backdrop {
+  background: rgba(18, 22, 18, .72);
+}
+
+.viewer-frame {
+  min-height: min(760px, calc(100vh - 2rem));
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+}
+
+.viewer-header,
+.viewer-footer {
+  background: var(--surface);
+  border-color: var(--line-dark);
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.viewer-header { border-bottom: 1px solid var(--line-dark); }
+.viewer-footer { border-top: 1px solid var(--line-dark); font-size: .78rem; }
+
+.viewer-label {
+  margin: 0 0 .2rem;
+  color: var(--muted);
+  font-size: .68rem;
+  letter-spacing: .18em;
+}
+
+.viewer-header h2 {
+  margin: 0;
+  font-family: "Noto Serif JP", "Yu Mincho", serif;
+  font-size: clamp(1rem, 2.5vw, 1.45rem);
+  line-height: 1.45;
+}
+
+.viewer-close {
+  border: 1px solid var(--line-dark);
+  background: transparent;
+  padding: .45rem .8rem;
+  font: inherit;
+  font-size: .78rem;
+  cursor: pointer;
+}
+.viewer-close:hover { background: #e4e5df; }
+
+.viewer-status {
+  margin: 1.2rem;
+  border: 1px dashed var(--line-dark);
+  background: var(--surface);
+  padding: 2rem;
+  text-align: center;
+  color: var(--muted);
+}
+
+.viewer-pages {
+  padding: 1.25rem;
+  overflow: auto;
+  display: grid;
+  gap: 1.5rem;
+  justify-items: center;
+}
+
+.viewer-page {
+  width: min(100%, 900px);
+  margin: 0;
+}
+
+.viewer-page img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line-dark);
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(20, 24, 20, .1);
+}
+
+.viewer-page figcaption {
+  margin-top: .35rem;
+  color: var(--muted);
+  font-family: "Roboto Mono", "Consolas", monospace;
+  font-size: .7rem;
+  text-align: right;
+}
+
 @media (max-width: 760px) {
   .header-inner { min-height: 110px; }
   .registry-mark { width: 64px; height: 64px; }
@@ -235,4 +337,9 @@ a:hover { text-decoration-thickness: 2px; }
   .record-card { grid-template-columns: 1fr; }
   .record-link { justify-self: start; }
   .site-footer { display: block; }
+  .record-viewer { width: 100%; max-height: 100vh; border-left: 0; border-right: 0; }
+  .viewer-frame { min-height: 100vh; }
+  .viewer-header, .viewer-footer { align-items: flex-start; }
+  .viewer-footer { flex-direction: column; }
+  .viewer-pages { padding: .75rem; gap: 1rem; }
 }
