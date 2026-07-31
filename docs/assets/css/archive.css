@@ -74,10 +74,6 @@ a:hover { text-decoration-thickness: 2px; }
   flex: 0 0 auto;
   display: grid;
   place-items: center;
-  padding: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 4px 14px rgba(20, 24, 20, .12);
 }
 
 .site-logo img {
@@ -334,7 +330,7 @@ a:hover { text-decoration-thickness: 2px; }
 
 @media (max-width: 760px) {
   .header-inner { min-height: 110px; }
-  .site-logo { width: 72px; height: 72px; padding: 6px; }
+  .site-logo { width: 72px; height: 72px; }
   .status-grid { grid-template-columns: 1fr; }
   .record-card { grid-template-columns: 1fr; }
   .record-link { justify-self: start; }
