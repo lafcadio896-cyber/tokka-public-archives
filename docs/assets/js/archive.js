@@ -1,7 +1,6 @@
 (() => {
-  const owner = "lafcadio896-cyber";
-  const repo = "tokka-public-archives";
-  const apiRoot = `https://api.github.com/repos/${owner}/${repo}/contents`;
+  const rawRoot = "https://raw.githubusercontent.com/lafcadio896-cyber/tokka-public-archives/main/archives";
+  const manifestUrl = new URL("assets/data/records.json", document.baseURI).toString();
 
   const list = document.querySelector("[data-record-list]");
   const count = document.querySelector("[data-record-count]");
@@ -15,29 +14,17 @@
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 
-  const request = async (url) => {
-    const response = await fetch(url, {
-      headers: { Accept: "application/vnd.github+json" }
-    });
-    if (!response.ok) throw new Error(`GitHub API: ${response.status}`);
+  const fetchJson = async (url) => {
+    const response = await fetch(url, { cache: "no-store" });
+    if (!response.ok) throw new Error(`HTTP ${response.status}: ${url}`);
     return response.json();
   };
 
   const readJson = async (folder) => {
-    const files = await request(`${apiRoot}/archives/${encodeURIComponent(folder)}`);
-    const finalJson = files.find((file) => file.name === "final.json");
-    if (!finalJson?.download_url) return null;
-    const response = await fetch(finalJson.download_url);
-    if (!response.ok) return null;
-    return response.json();
+    return fetchJson(`${rawRoot}/${encodeURIComponent(folder)}/final.json`);
   };
 
-  const readImages = async (folder) => {
-    const files = await request(`${apiRoot}/archives/${encodeURIComponent(folder)}/images`);
-    return files
-      .filter((file) => file.type === "file" && /\.png$/i.test(file.name) && file.download_url)
-      .sort((a, b) => a.name.localeCompare(b.name, "ja"));
-  };
+  const imageUrl = (folder, name) => `${rawRoot}/${encodeURIComponent(folder)}/images/${encodeURIComponent(name)}`;
 
   const formatDate = (folder) => {
     const match = folder.match(/TK-(\d{4})-(\d{2})-(\d{2})/);
@@ -89,6 +76,7 @@
   const viewerStatus = viewer.querySelector("[data-viewer-status]");
   const viewerPages = viewer.querySelector("[data-viewer-pages]");
   const viewerCount = viewer.querySelector("[data-viewer-count]");
+  const recordIndex = new Map();
 
   const closeViewer = () => {
     if (viewer.open) viewer.close();
@@ -99,7 +87,7 @@
     if (event.target === viewer) closeViewer();
   });
 
-  const openViewer = async (folder, title) => {
+  const openViewer = (folder, title) => {
     viewerTitle.textContent = title;
     viewerStatus.textContent = "画像を照会しています。";
     viewerStatus.hidden = false;
@@ -107,25 +95,19 @@
     viewerCount.textContent = "";
     viewer.showModal();
 
-    try {
-      const images = await readImages(folder);
-      if (!images.length) {
-        viewerStatus.textContent = "閲覧可能な画像が登録されていません。";
-        return;
-      }
-
-      viewerStatus.hidden = true;
-      viewerCount.textContent = `${images.length}ページ`;
-      viewerPages.innerHTML = images.map((image, index) => `
-        <figure class="viewer-page">
-          <img src="${image.download_url}" alt="${escapeHtml(title)} ${index + 1}ページ目" loading="${index === 0 ? "eager" : "lazy"}">
-          <figcaption>${String(index + 1).padStart(2, "0")} / ${String(images.length).padStart(2, "0")}</figcaption>
-        </figure>`).join("");
-    } catch (error) {
-      viewerStatus.hidden = false;
-      viewerStatus.textContent = "画像を取得できませんでした。時間をおいて再度確認してください。";
-      console.error(error);
+    const images = recordIndex.get(folder)?.images || [];
+    if (!images.length) {
+      viewerStatus.textContent = "閲覧可能な画像が登録されていません。";
+      return;
     }
+
+    viewerStatus.hidden = true;
+    viewerCount.textContent = `${images.length}ページ`;
+    viewerPages.innerHTML = images.map((name, index) => `
+      <figure class="viewer-page">
+        <img src="${imageUrl(folder, name)}" alt="${escapeHtml(title)} ${index + 1}ページ目" loading="${index === 0 ? "eager" : "lazy"}">
+        <figcaption>${String(index + 1).padStart(2, "0")} / ${String(images.length).padStart(2, "0")}</figcaption>
+      </figure>`).join("");
   };
 
   list.addEventListener("click", (event) => {
@@ -136,13 +118,13 @@
 
   const load = async () => {
     try {
-      const folders = await request(`${apiRoot}/archives`);
-      const names = folders
-        .filter((entry) => entry.type === "dir" && entry.name.startsWith("TK-"))
-        .map((entry) => entry.name)
-        .sort()
-        .reverse();
+      const manifest = await fetchJson(manifestUrl);
+      const records = Array.isArray(manifest?.records) ? manifest.records : [];
+      records
+        .filter((entry) => entry && typeof entry.folder === "string")
+        .forEach((entry) => recordIndex.set(entry.folder, entry));
 
+      const names = [...recordIndex.keys()].sort().reverse();
       count.textContent = `${names.length}件`;
       updated.textContent = names.length ? formatDate(names[0]) : "未登録";
 
@@ -151,11 +133,11 @@
         return;
       }
 
-      const records = await Promise.all(names.map(async (name) => ({
+      const reports = await Promise.all(names.map(async (name) => ({
         name,
         report: await readJson(name).catch(() => null)
       })));
-      list.innerHTML = records.map(({ name, report }) => renderCard(name, report)).join("");
+      list.innerHTML = reports.map(({ name, report }) => renderCard(name, report)).join("");
     } catch (error) {
       count.textContent = "確認不能";
       updated.textContent = "確認不能";
