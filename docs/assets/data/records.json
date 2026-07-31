@@ -1,0 +1,16 @@
+{
+  "records": [
+    {"folder":"TK-2026-07-30-R0017A01","images":["01.png","02.png","03.png","04.png"]},
+    {"folder":"TK-2026-07-29-R0016A01","images":["01.png","02.png","03.png"]},
+    {"folder":"TK-2026-07-28-R0015A01","images":["01.png","02.png","03.png"]},
+    {"folder":"TK-2026-07-28-R0014A01","images":["01.png","02.png","03.png"]},
+    {"folder":"TK-2026-01-20-N008","images":["01.png","02.png","03.png","04.png"]},
+    {"folder":"TK-2025-12-15-N007","images":["01.png","02.png","03.png"]},
+    {"folder":"TK-2025-12-01-N006","images":["01.png","02.png","03.png","04.png"]},
+    {"folder":"TK-2025-11-15-N005","images":["01.png","02.png","03.png","04.png"]},
+    {"folder":"TK-2025-11-12-N004","images":["01.png","02.png","03.png","04.png"]},
+    {"folder":"TK-2025-10-12-N003","images":["01.png","02.png","03.png","04.png"]},
+    {"folder":"TK-2025-09-25-N002","images":["01.png","02.png","03.png","04.png"]},
+    {"folder":"TK-2025-09-18-N001","images":["01.png","02.png","03.png","04.png"]}
+  ]
+}
