@@ -34,10 +34,3 @@ title: 東彁総合研究所 公開記録保管庫
     <div class="loading-state">公開記録を照会しています。</div>
   </div>
 </section>
-
-<nav class="utility-links" aria-label="関連情報">
-  <a href="https://github.com/lafcadio896-cyber/tokka-public-archives/tree/main/archives">記録原本一覧</a>
-  <a href="https://github.com/lafcadio896-cyber/tokka-public-archives/blob/main/PUBLICATION_POLICY.md">公開方針</a>
-  <a href="https://github.com/lafcadio896-cyber/tokka-public-archives/blob/main/RIGHTS.md">権利表記</a>
-  <a href="https://github.com/lafcadio896-cyber/tokka-public-archives/issues/new/choose">訂正依頼</a>
-</nav>

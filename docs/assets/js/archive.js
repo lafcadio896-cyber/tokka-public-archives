@@ -81,7 +81,6 @@
       <div class="viewer-pages" data-viewer-pages></div>
       <footer class="viewer-footer">
         <span data-viewer-count></span>
-        <a data-viewer-source target="_blank" rel="noopener noreferrer">記録原本を確認</a>
       </footer>
     </div>`;
   document.body.appendChild(viewer);
@@ -90,7 +89,6 @@
   const viewerStatus = viewer.querySelector("[data-viewer-status]");
   const viewerPages = viewer.querySelector("[data-viewer-pages]");
   const viewerCount = viewer.querySelector("[data-viewer-count]");
-  const viewerSource = viewer.querySelector("[data-viewer-source]");
 
   const closeViewer = () => {
     if (viewer.open) viewer.close();
@@ -107,7 +105,6 @@
     viewerStatus.hidden = false;
     viewerPages.innerHTML = "";
     viewerCount.textContent = "";
-    viewerSource.href = `https://github.com/${owner}/${repo}/tree/main/archives/${encodeURIComponent(folder)}`;
     viewer.showModal();
 
     try {
