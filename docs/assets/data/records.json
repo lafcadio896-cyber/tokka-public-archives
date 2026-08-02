@@ -1,6 +1,15 @@
 {
   "records": [
     {
+      "folder": "TK-2026-08-02-R0021A01",
+      "images": [
+        "01.png",
+        "02.png",
+        "03.png",
+        "04.png"
+      ]
+    },
+    {
       "folder": "TK-2026-08-01-R0020A01",
       "images": [
         "01.png",
