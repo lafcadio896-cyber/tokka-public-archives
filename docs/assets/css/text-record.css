@@ -1,0 +1,75 @@
+.viewer-document {
+  width: min(820px, calc(100% - 2.5rem));
+  margin: 1.5rem auto 2.5rem;
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+  overflow: auto;
+  background: #fff;
+  border: 1px solid var(--line-dark);
+  box-shadow: 0 8px 24px rgba(20, 24, 20, .08);
+  font-family: "Noto Serif JP", "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: .98rem;
+  line-height: 2;
+}
+
+.viewer-document h1 {
+  margin: 0 0 2rem;
+  padding-bottom: .8rem;
+  border-bottom: 2px solid var(--ink);
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+  line-height: 1.55;
+  letter-spacing: .07em;
+}
+
+.viewer-document h2 {
+  margin: 2.6rem 0 1rem;
+  padding-bottom: .35rem;
+  border-bottom: 1px solid var(--line-dark);
+  font-size: 1.15rem;
+  letter-spacing: .08em;
+}
+
+.viewer-document h3,
+.viewer-document h4 {
+  margin: 2rem 0 .8rem;
+  font-size: 1rem;
+  letter-spacing: .06em;
+}
+
+.viewer-document p {
+  margin: .8rem 0 1.2rem;
+}
+
+.viewer-document ul {
+  margin: .8rem 0 1.5rem 1.4rem;
+  padding: 0;
+}
+
+.viewer-document li {
+  margin: .35rem 0;
+}
+
+.viewer-document hr {
+  margin: 2.2rem 0;
+  border: 0;
+  border-top: 1px solid var(--line-dark);
+}
+
+.viewer-document code {
+  font-family: "Roboto Mono", "Consolas", monospace;
+  font-size: .9em;
+}
+
+.viewer-document strong {
+  font-family: "Noto Sans JP", "Yu Gothic", sans-serif;
+  font-weight: 600;
+}
+
+@media (max-width: 760px) {
+  .viewer-document {
+    width: calc(100% - 1rem);
+    margin: .5rem auto 1rem;
+    padding: 1.2rem;
+    font-size: .93rem;
+    line-height: 1.9;
+  }
+}
